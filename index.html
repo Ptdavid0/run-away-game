@@ -6,14 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/style.css">
-    <title>Iron Invaders</title>
+    <title>Run Away</title>
 </head>
 
 <body>
 
-    <canvas id="myCanvas" width="1000" height="700" style="cursor: none"></canvas>
+    <canvas id="myCanvas" width="1000" height="700" style="cursor: none ; border-radius: 20px"></canvas>
     <script src="/script.js"></script>
-
+    <div id="mainDiv">
+        <h1>RUN AWAY</h1>
+        <p>THIS GAME IS DESIGNED TO APRIMORATE YOUR ABILITY OF FOCUS</p>
+        <p>TRY TO SURVIVE AS LONG AS POSSIBLE. YOU ONLY HAVE 10 LIVES</p>
+        <p>CONTROL THE PLAYER WITH THE MOUSE. ESCAPE THE MULTI-COLOR SPHERES. DO NOT LOSE YOUR FOCUS!!!</p>
+        <button id="btn" onclick="setState()">START GAME</button>
+    </div>
+    <div id="secondDiv">
+        <h1>STATUS:</h1>
+        <h2 id="status">Ready</h2>
+        <h1>SCORE:</h1>
+        <h2 id="score">0</h2>
+        <h1>LIVES:</h1>
+        <h2 id="lives">10HP</h2>
+    </div>
 </body>
 
 </html>

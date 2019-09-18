@@ -1,9 +1,16 @@
+//Start of the canvas
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
-let TimeOn = Date.now();
-let survived = 0;
+// Start of the game Structure
+let TimeOn = Date.now(); // Get the time at the beginning of the game
+let survived = 0; // Variable that is gonna be used for time of play
+let count = 0; // Variable that will control the player's fade after being hit
+let gen = 0; // Variable used to generate new enemys through time
+let state = false;
+let engine;
 
+// Our player
 let player = {
   x: 100,
   spdX: 50,
@@ -13,23 +20,48 @@ let player = {
   hp: 10
 };
 
+//Object thet will save our enemys
 let enemies = {};
-GenerateEnemy();
-GenerateEnemy();
-GenerateEnemy();
 
+function startNewGame() {
+  player.hp = 10;
+  TimeOn = Date.now();
+  enemies = {};
+  GenerateEnemy(); // Declaring a new enemy
+  GenerateEnemy(); // Declaring a new enemy
+  GenerateEnemy(); // Declaring a new enemy
+  engine = setInterval(update, 40);
+  document.getElementById("status").innerText = "Playing...";
+  document.getElementById("mainDiv").style.opacity = 0.3;
+  document.getElementById("mainDiv").style.opacity = 0.3;
+}
+
+function setState() {
+  state = !state;
+
+  if (state) {
+    startNewGame();
+  } else {
+    clearInterval(engine);
+    state = !state;
+    startNewGame();
+  }
+}
+
+//Function that will randomly create new enemys. The radius is always the same
 function GenerateEnemy() {
   let enemy = {
     x: Math.random() * canvas.width,
-    spdX: 5 + Math.random() * 5,
+    spdX: 15 + Math.random() * 5,
     y: Math.random() * canvas.height,
-    spdY: 5 + Math.random() * 5,
+    spdY: 15 + Math.random() * 5,
     id: Math.random(),
     radius: 25
   };
-  enemies[enemy.id] = enemy;
+  enemies[enemy.id] = enemy; // Saving the new enemy on the object enemies
 }
 
+// Function that will track our mouse location and assing the player to it
 document.onmousemove = function(mouse) {
   let mouseX =
     mouse.clientX -
@@ -38,8 +70,9 @@ document.onmousemove = function(mouse) {
     mouse.clientY -
     document.getElementById("myCanvas").getBoundingClientRect().top;
 
+  // Not allowing the player to leave the canvas area
   if (mouseX < player.radius / 2) {
-    mouse = player.radius / 2;
+    mouseX = player.radius / 2;
   } else if (mouseX > canvas.width - player.radius / 2) {
     mouseX = canvas.width - player.radius / 2;
   } else if (mouseY < player.radius / 2) {
@@ -48,10 +81,11 @@ document.onmousemove = function(mouse) {
     mouseY = canvas.height - player.radius / 2;
   }
 
-  player.x = mouseX; //- 650
-  player.y = mouseY; //- 75
+  player.x = mouseX;
+  player.y = mouseY;
 };
 
+// Function that will allow the collision Circle - Circle--------------------------
 function getDistance(entety1, entety2) {
   let vx = entety1.x - entety2.x;
   let vy = entety1.y - entety2.y;
@@ -60,13 +94,29 @@ function getDistance(entety1, entety2) {
 
 function collision(entety1, entety2) {
   var distance = getDistance(entety1, entety2);
-  return distance < entety2.radius + entety1.radius;
+  return distance < entety2.radius + entety1.radius; // Distance between the two circles
 }
-
+//----------------------------------------------------------------------------------
 function updateEntity(obj, color) {
   entityPosition(obj);
   drawObj(obj, color);
 }
+
+function gameOver() {
+  if (player.hp < 0) {
+    survived = 0;
+    survived = ((Date.now() - TimeOn) / 1000).toFixed(1);
+    drawGameOver();
+    clearInterval(engine);
+  }
+}
+
+function drawGameOver() {
+  document.getElementById("status").innerText = "Game Over";
+  document.getElementById("score").innerHTML = `${survived}s`;
+  document.getElementById("mainDiv").style.opacity = 1;
+}
+
 function entityPosition(obj) {
   obj.x += obj.spdX;
   obj.y += obj.spdY;
@@ -89,24 +139,23 @@ function drawObj(obj, color) {
   ctx.fillStyle = color;
   ctx.fill();
 }
-
-let count = 0;
-
+//-------------------------------------------------------------------------UPDATE----------------------------------------------------------------
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawObj(player, "yellow");
+  drawObj(player, "limegreen");
   ctx.font = "40px Arial";
-  ctx.fillText("HP:" + player.hp, 0, 30);
 
   for (const key in enemies) {
     updateEntity(enemies[key], randomColor());
 
     let isColliding = collision(player, enemies[key]);
+
     if (count !== 0) {
       isColliding = false;
       count += 1;
       drawObj(player, "red");
-      if (count === 100) {
+
+      if (count === 200) {
         count = 0;
       }
     }
@@ -114,19 +163,18 @@ function update() {
     if (isColliding) {
       console.log(`Collision dettected}`);
       player.hp = player.hp - 1;
-      if (player.hp < 0) {
-        console.log("YOU LOOOOOOOOST");
-        player.hp = 10;
-        survived = 0;
-        survived = Date.now() - TimeOn;
-        TimeOn = Date.now();
-      }
+      document.getElementById("lives").innerHTML = `${player.hp}HP`;
       enemies[key].spdX = -enemies[key].spdX;
       enemies[key].spdY = -enemies[key].spdY;
       count += 1;
     }
   }
-  ctx.fillText(survived, 0, 80);
-}
 
-setInterval(update, 50);
+  gameOver();
+
+  gen += 1;
+  if (gen === 200) {
+    GenerateEnemy();
+    gen = 0;
+  }
+}
