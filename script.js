@@ -11,6 +11,45 @@ let state = false;
 let engine;
 let sound = document.getElementById("music");
 let soundtrack = document.getElementById("soundtrack");
+let enemies = {}; //Object thet will save our enemys
+
+//-------------------------Levels Control-------------------------
+let levels;
+
+document.getElementById("rabbit").onclick = () => {
+  levels = "rabbit";
+  setState();
+};
+document.getElementById("runners").onclick = () => {
+  levels = "runners";
+  setState();
+};
+
+document.getElementById("hydra").onclick = () => {
+  levels = "hydra";
+  setState();
+};
+
+const startLevels = () => {
+  if (levels === "rabbit") {
+    GenerateEnemy(); // Declaring a new enemy
+    GenerateEnemy();
+    GenerateEnemy();
+  } else if (levels === "runners") {
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+  } else if (levels === "hydra") {
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+    GenerateEnemy();
+  }
+};
+//-----------------------------------------------------------------
 
 // Our player
 let player = {
@@ -22,22 +61,18 @@ let player = {
   hp: 10
 };
 
-//Object thet will save our enemys
-let enemies = {};
-
-function startNewGame() {
+//Function loading the game on the click of the button "Start Game"
+const startNewGame = () => {
   player.hp = 10;
   TimeOn = Date.now();
   enemies = {};
-  GenerateEnemy(); // Declaring a new enemy
-  GenerateEnemy(); // Declaring a new enemy
-  GenerateEnemy(); // Declaring a new enemy
-  engine = setInterval(update, 40);
   document.getElementById("status").innerText = "Playing...";
   document.getElementById("mainDiv").style.opacity = 0.3;
-  document.getElementById("mainDiv").style.opacity = 0.3;
+  document.getElementById("btns").style.opacity = 0.3;
   soundtrack.play();
-}
+  startLevels();
+  engine = setInterval(update, 40);
+};
 
 function setState() {
   state = !state;
@@ -118,11 +153,10 @@ function gameOver() {
   }
 }
 // Function generating enemys on the game every 8 seconds
-function generateEnemys() {
+function multiplyEnemy() {
   gen += 1;
-  if (gen === 200) {
+  if (gen % 200 === 0) {
     GenerateEnemy();
-    gen = 0;
   }
 }
 
@@ -158,7 +192,9 @@ function drawObj(obj, color) {
   ctx.fillStyle = color;
   ctx.fill();
 }
+
 //-------------------------------------------------------------------------UPDATE----------------------------------------------------------------
+
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawObj(player, "limegreen");
@@ -187,9 +223,33 @@ function update() {
       enemies[key].spdX = -enemies[key].spdX;
       enemies[key].spdY = -enemies[key].spdY;
       count += 1;
+      if (levels === "hydra") {
+        delete enemies[key];
+        GenerateEnemy();
+        GenerateEnemy();
+      }
     }
   }
 
   gameOver();
-  generateEnemys();
+  if (levels === "rabbit") {
+    multiplyEnemy();
+  }
+  if (levels === "runners") {
+    if (gen % 400 === 0) {
+      let nemysis = Object.values(enemies);
+      nemysis.forEach(enemy => {
+        if (enemy.spdY > 0) {
+          enemy.spdY += 0.05;
+        } else {
+          enemy.spdY -= 0.05;
+        }
+        if (enemy.spdX > 0) {
+          enemy.spdX += 0.05;
+        } else {
+          enemy.spdX -= 0.05;
+        }
+      });
+    }
+  }
 }

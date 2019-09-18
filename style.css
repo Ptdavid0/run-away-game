@@ -45,7 +45,7 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
-    bottom: 405px;
+    bottom: 437px;
     left: 50px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
@@ -81,4 +81,41 @@ h2 {
     color: rgb(0, 255, 64);
     margin-bottom: 20px;
     font-size: 50px
+}
+
+.levs {
+    background-color: rgb(0, 255, 64);
+    width: 300px;
+    height: 75px;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+}
+
+#btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    width: 1000px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    bottom: 250px;
+    left: 650px;
+    border: 2px solid rgb(0, 255, 64);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px;
+
+}
+
+#myCanvas {
+    cursor: none;
+    border-radius: 20px;
 }
