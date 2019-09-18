@@ -9,6 +9,8 @@ let count = 0; // Variable that will control the player's fade after being hit
 let gen = 0; // Variable used to generate new enemys through time
 let state = false;
 let engine;
+let sound = document.getElementById("music");
+let soundtrack = document.getElementById("soundtrack");
 
 // Our player
 let player = {
@@ -34,6 +36,7 @@ function startNewGame() {
   document.getElementById("status").innerText = "Playing...";
   document.getElementById("mainDiv").style.opacity = 0.3;
   document.getElementById("mainDiv").style.opacity = 0.3;
+  soundtrack.play();
 }
 
 function setState() {
@@ -97,26 +100,40 @@ function collision(entety1, entety2) {
   return distance < entety2.radius + entety1.radius; // Distance between the two circles
 }
 //----------------------------------------------------------------------------------
+// Function updating the objects on the canvas
 function updateEntity(obj, color) {
   entityPosition(obj);
   drawObj(obj, color);
 }
 
+//Function responsable for the gameover verification and actions
 function gameOver() {
-  if (player.hp < 0) {
+  if (player.hp <= 0) {
     survived = 0;
     survived = ((Date.now() - TimeOn) / 1000).toFixed(1);
     drawGameOver();
     clearInterval(engine);
+    soundtrack.pause();
+    soundtrack.currentTime = 0;
+  }
+}
+// Function generating enemys on the game every 8 seconds
+function generateEnemys() {
+  gen += 1;
+  if (gen === 200) {
+    GenerateEnemy();
+    gen = 0;
   }
 }
 
+//Function drawing the game over on the screen
 function drawGameOver() {
   document.getElementById("status").innerText = "Game Over";
   document.getElementById("score").innerHTML = `${survived}s`;
   document.getElementById("mainDiv").style.opacity = 1;
 }
 
+//Function controlling the enemys speed and not allowing them to leave the canvas
 function entityPosition(obj) {
   obj.x += obj.spdX;
   obj.y += obj.spdY;
@@ -129,10 +146,12 @@ function entityPosition(obj) {
   }
 }
 
+//Function generating colors for the enemys
 function randomColor() {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
+//Function drawing the objects on the canvas(enemys and player)
 function drawObj(obj, color) {
   ctx.beginPath();
   ctx.arc(obj.x, obj.y, obj.radius, 0, 2 * Math.PI);
@@ -154,6 +173,7 @@ function update() {
       isColliding = false;
       count += 1;
       drawObj(player, "red");
+      sound.play();
 
       if (count === 200) {
         count = 0;
@@ -171,10 +191,5 @@ function update() {
   }
 
   gameOver();
-
-  gen += 1;
-  if (gen === 200) {
-    GenerateEnemy();
-    gen = 0;
-  }
+  generateEnemys();
 }
