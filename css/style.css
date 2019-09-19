@@ -6,6 +6,7 @@
 body {
     display: flex;
     background-color: rgb(17, 17, 17);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #myCanvas {
@@ -13,7 +14,6 @@ body {
     margin: 100px auto;
     justify-content: center;
     border: 2px solid rgb(0, 255, 64);
-    /* cursor: none; */
     border-radius: 20px;
 }
 
@@ -31,7 +31,6 @@ body {
 }
 
 p {
-    color: rgb(0, 255, 64);
     margin-bottom: 30px;
     font-size: 30px
 }
@@ -44,19 +43,19 @@ p {
     align-items: center;
     height: 800px;
     width: 362px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     position: absolute;
     bottom: 45px;
     left: 60px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
-    text-align: center
+    text-align: center;
+    color: rgb(0, 255, 64)
 }
 
 h1 {
-    color: rgb(0, 255, 64);
-    margin-bottom: 30px;
+    margin: 0 10px 10px 30px;
     font-size: 75px
 }
 
@@ -69,18 +68,18 @@ h1 {
     align-items: center;
     height: 796px;
     width: 362px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     position: absolute;
     bottom: 50px;
     right: 60px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
-    text-align: center
+    text-align: center;
+    color: rgb(0, 255, 64);
 }
 
 h2 {
-    color: rgb(0, 255, 64);
     margin-bottom: 20px;
     font-size: 50px
 }
@@ -105,7 +104,7 @@ h2 {
     align-items: center;
     height: fit-content;
     width: 981px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     position: absolute;
     bottom: 48px;
@@ -145,13 +144,16 @@ h2 {
 }
 
 #rabbit {
-    background-color: red;
+    background-color: fuchsia;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #runners {
     background-color: aqua;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #hydra {
     background-color: yellow;
+    font-family: 'Courier New', Courier, monospace;
 }

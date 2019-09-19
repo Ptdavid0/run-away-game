@@ -17,13 +17,64 @@ let enemies = {}; //Object thet will save our enemys
 //-------------------------Levels Control-------------------------
 let levels;
 
+document.getElementById("rabbit").onmouseover = () => {
+  document.getElementById("1p").innerText = "RABBIT PARTY MODE";
+  document.getElementById("2p").innerText =
+    "EVERY FEW SECONDS NEW SPHERES ARE GOING TO SPAWN ON THE GAME";
+  document.getElementById("3p").innerText = "DO NOT LET THEM TOUCH YOU!!!";
+  document.getElementById("mainDiv").style.color = "fuchsia";
+};
+document.getElementById("rabbit").onmouseout = () => {
+  document.getElementById("1p").innerText =
+    "THIS GAME IS DESIGNED TO APRIMORATE YOUR ABILITY OF FOCUS";
+  document.getElementById("2p").innerText =
+    "TRY TO SURVIVE AS LONG AS POSSIBLE. YOU ONLY HAVE 10 LIVES";
+  document.getElementById("3p").innerText =
+    "CONTROL THE PLAYER WITH THE MOUSE. ESCAPE THE MULTI-COLOR SPHERES. DO NOT LOSE YOUR FOCUS!!!";
+  document.getElementById("mainDiv").style.color = "rgb(0, 255, 64)";
+};
+
+document.getElementById("runners").onmouseover = () => {
+  document.getElementById("1p").innerText = "SPEED RUNNERS MODE";
+  document.getElementById("2p").innerText =
+    "THIS MODE HAS ONLY 5 SPHERES ON THE SCREEN, BUT THEY WON'T STOP GETTING FASTER. MUCH FASTER!";
+  document.getElementById("3p").innerText = "DO NOT LET THEM TOUCH YOU!!!";
+  document.getElementById("mainDiv").style.color = "aqua";
+};
+document.getElementById("runners").onmouseout = () => {
+  document.getElementById("1p").innerText =
+    "THIS GAME IS DESIGNED TO APRIMORATE YOUR ABILITY OF FOCUS";
+  document.getElementById("2p").innerText =
+    "TRY TO SURVIVE AS LONG AS POSSIBLE. YOU ONLY HAVE 10 LIVES";
+  document.getElementById("3p").innerText =
+    "CONTROL THE PLAYER WITH THE MOUSE. ESCAPE THE MULTI-COLOR SPHERES. DO NOT LOSE YOUR FOCUS!!!";
+  document.getElementById("mainDiv").style.color = "rgb(0, 255, 64)";
+};
+
+document.getElementById("hydra").onmouseover = () => {
+  document.getElementById("1p").innerText = "HYDRA MODE";
+  document.getElementById("2p").innerText =
+    "ONLY 5 SPHERES ON THE SCREEN, BUT BEWARE, IF YOU HIT ONE OF THEM, TWO MORE ARE GOING TO APPER ON IT'S PLACE!";
+  document.getElementById("3p").innerText = "DO NOT LET THEM TOUCH YOU!!!";
+  document.getElementById("mainDiv").style.color = "yellow";
+};
+document.getElementById("hydra").onmouseout = () => {
+  document.getElementById("1p").innerText =
+    "THIS GAME IS DESIGNED TO APRIMORATE YOUR ABILITY OF FOCUS";
+  document.getElementById("2p").innerText =
+    "TRY TO SURVIVE AS LONG AS POSSIBLE. YOU ONLY HAVE 10 LIVES";
+  document.getElementById("3p").innerText =
+    "CONTROL THE PLAYER WITH THE MOUSE. ESCAPE THE MULTI-COLOR SPHERES. DO NOT LOSE YOUR FOCUS!!!";
+  document.getElementById("mainDiv").style.color = "rgb(0, 255, 64)";
+};
+
 document.getElementById("rabbit").onclick = () => {
   levels = "rabbit";
-  document.getElementById("myCanvas").style.border = "2px solid red";
-  document.getElementById("pauseBtn").style.backgroundColor = "red";
-  document.getElementById("secondDiv").style.border = "2px solid red";
-  document.getElementById("btns").style.border = "2px solid red";
-  document.getElementById("mainDiv").style.border = "2px solid red";
+  document.getElementById("myCanvas").style.border = "2px solid fuchsia";
+  document.getElementById("pauseBtn").style.backgroundColor = "fuchsia";
+  document.getElementById("secondDiv").style.border = "2px solid fuchsia";
+  document.getElementById("btns").style.border = "2px solid fuchsia";
+  document.getElementById("mainDiv").style.border = "2px solid fuchsia";
   setState();
 };
 
