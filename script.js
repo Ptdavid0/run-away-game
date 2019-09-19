@@ -21,6 +21,7 @@ document.getElementById("rabbit").onclick = () => {
   levels = "rabbit";
   setState();
 };
+
 document.getElementById("runners").onclick = () => {
   levels = "runners";
   setState();
