@@ -8,6 +8,7 @@ let survived = 0; // Variable that is gonna be used for time of play
 let count = 0; // Variable that will control the player's fade after being hit
 let gen = 0; // Variable used to generate new enemys through time
 let state = false;
+let pause = false;
 let engine;
 let sound = document.getElementById("music");
 let soundtrack = document.getElementById("soundtrack");
@@ -74,20 +75,35 @@ const startNewGame = () => {
   engine = setInterval(update, 40);
 };
 
-function setState() {
+const setState = () => {
   state = !state;
 
   if (state) {
     startNewGame();
   } else {
     clearInterval(engine);
+    soundtrack.pause();
+    soundtrack.currentTime = 0;
+    soundtrack.play();
     state = !state;
     startNewGame();
   }
-}
+};
+
+document.getElementById("pauseBtn").onclick = () => {
+  pause = !pause;
+
+  if (pause) {
+    soundtrack.pause();
+    // document.getElementById().src =
+  } else {
+    soundtrack.play();
+    // pause = !pause;
+  }
+};
 
 //Function that will randomly create new enemys. The radius is always the same
-function GenerateEnemy() {
+const GenerateEnemy = () => {
   let enemy = {
     x: Math.random() * canvas.width,
     spdX: 15 + Math.random() * 5,
@@ -97,10 +113,10 @@ function GenerateEnemy() {
     radius: 25
   };
   enemies[enemy.id] = enemy; // Saving the new enemy on the object enemies
-}
+};
 
 // Function that will track our mouse location and assing the player to it
-document.onmousemove = function(mouse) {
+document.onmousemove = mouse => {
   let mouseX =
     mouse.clientX -
     document.getElementById("myCanvas").getBoundingClientRect().left;
@@ -124,11 +140,11 @@ document.onmousemove = function(mouse) {
 };
 
 // Function that will allow the collision Circle - Circle--------------------------
-function getDistance(entety1, entety2) {
+const getDistance = (entety1, entety2) => {
   let vx = entety1.x - entety2.x;
   let vy = entety1.y - entety2.y;
   return Math.sqrt(vx * vx + vy * vy); // Gerando o valor da hipotenusa
-}
+};
 
 function collision(entety1, entety2) {
   var distance = getDistance(entety1, entety2);
@@ -136,13 +152,13 @@ function collision(entety1, entety2) {
 }
 //----------------------------------------------------------------------------------
 // Function updating the objects on the canvas
-function updateEntity(obj, color) {
+const updateEntity = (obj, color) => {
   entityPosition(obj);
   drawObj(obj, color);
-}
+};
 
 //Function responsable for the gameover verification and actions
-function gameOver() {
+const gameOver = () => {
   if (player.hp <= 0) {
     survived = 0;
     survived = ((Date.now() - TimeOn) / 1000).toFixed(1);
@@ -151,24 +167,25 @@ function gameOver() {
     soundtrack.pause();
     soundtrack.currentTime = 0;
   }
-}
+};
 // Function generating enemys on the game every 8 seconds
-function multiplyEnemy() {
+const multiplyEnemy = () => {
   gen += 1;
   if (gen % 200 === 0) {
     GenerateEnemy();
   }
-}
+};
 
 //Function drawing the game over on the screen
-function drawGameOver() {
+const drawGameOver = () => {
   document.getElementById("status").innerText = "Game Over";
   document.getElementById("score").innerHTML = `${survived}s`;
   document.getElementById("mainDiv").style.opacity = 1;
-}
+  document.getElementById("btns").style.opacity = 1;
+};
 
 //Function controlling the enemys speed and not allowing them to leave the canvas
-function entityPosition(obj) {
+const entityPosition = obj => {
   obj.x += obj.spdX;
   obj.y += obj.spdY;
 
@@ -178,24 +195,24 @@ function entityPosition(obj) {
   if (obj.y < 0 || obj.y > canvas.height) {
     obj.spdY = -obj.spdY;
   }
-}
+};
 
 //Function generating colors for the enemys
-function randomColor() {
+const randomColor = () => {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
-}
+};
 
 //Function drawing the objects on the canvas(enemys and player)
-function drawObj(obj, color) {
+const drawObj = (obj, color) => {
   ctx.beginPath();
   ctx.arc(obj.x, obj.y, obj.radius, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
-}
+};
 
 //-------------------------------------------------------------------------UPDATE----------------------------------------------------------------
 
-function update() {
+const update = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawObj(player, "limegreen");
   ctx.font = "40px Arial";
@@ -252,4 +269,4 @@ function update() {
       });
     }
   }
-}
+};
