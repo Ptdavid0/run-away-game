@@ -99,7 +99,6 @@ document.getElementById("pauseBtn").onclick = () => {
     // document.getElementById().src =
   } else {
     soundtrack.play();
-    // pause = !pause;
   }
 };
 
@@ -141,6 +140,7 @@ document.onmousemove = mouse => {
 };
 
 // Function that will allow the collision Circle - Circle--------------------------
+
 const getDistance = (entety1, entety2) => {
   let vx = entety1.x - entety2.x;
   let vy = entety1.y - entety2.y;
@@ -152,6 +152,7 @@ function collision(entety1, entety2) {
   return distance < entety2.radius + entety1.radius; // Distance between the two circles
 }
 //----------------------------------------------------------------------------------
+
 // Function updating the objects on the canvas
 const updateEntity = (obj, color) => {
   entityPosition(obj);
@@ -169,6 +170,7 @@ const gameOver = () => {
     soundtrack.currentTime = 0;
   }
 };
+
 // Function generating enemys on the game every 8 seconds
 const multiplyEnemy = () => {
   gen += 1;
