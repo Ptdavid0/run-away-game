@@ -12,7 +12,9 @@ body {
     background-color: rgb(20, 20, 20);
     margin: 100px auto;
     justify-content: center;
-    border: 2px solid rgb(0, 255, 64)
+    border: 2px solid rgb(0, 255, 64);
+    /* cursor: none; */
+    border-radius: 20px;
 }
 
 #btn {
@@ -40,13 +42,13 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: fit-content;
-    width: 540px;
+    height: 800px;
+    width: 362px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
-    bottom: 437px;
-    left: 50px;
+    bottom: 45px;
+    left: 60px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
     text-align: center
@@ -63,15 +65,15 @@ h1 {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    height: 635px;
-    width: 540px;
+    height: 796px;
+    width: 362px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
-    bottom: 405px;
-    right: 50px;
+    bottom: 50px;
+    right: 60px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
     text-align: center
@@ -102,22 +104,17 @@ h2 {
     justify-content: space-between;
     align-items: center;
     height: fit-content;
-    width: 1000px;
+    width: 981px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     position: absolute;
-    bottom: 250px;
-    left: 650px;
+    bottom: 48px;
+    left: 424px;
     border: 2px solid rgb(0, 255, 64);
     border-radius: 20px;
     text-align: center;
     padding: 10px;
 
-}
-
-#myCanvas {
-    cursor: none;
-    border-radius: 20px;
 }
 
 #pauseDiv {
@@ -128,7 +125,7 @@ h2 {
     font-weight: bold;
     position: absolute;
     top: 101px;
-    right: 658px;
+    right: 424px;
     text-align: center;
 
 }
@@ -139,11 +136,22 @@ h2 {
     height: 50px;
     text-align: center;
     border: none;
-    /* border-radius: 30px; */
     border-top-right-radius: 20px;
     border-bottom-left-radius: 40px;
     font-weight: bold;
     outline: none;
     cursor: pointer;
     font-size: 20px
+}
+
+#rabbit {
+    background-color: red;
+}
+
+#runners {
+    background-color: aqua;
+}
+
+#hydra {
+    background-color: yellow;
 }

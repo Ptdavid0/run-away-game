@@ -19,16 +19,31 @@ let levels;
 
 document.getElementById("rabbit").onclick = () => {
   levels = "rabbit";
+  document.getElementById("myCanvas").style.border = "2px solid red";
+  document.getElementById("pauseBtn").style.backgroundColor = "red";
+  document.getElementById("secondDiv").style.border = "2px solid red";
+  document.getElementById("btns").style.border = "2px solid red";
+  document.getElementById("mainDiv").style.border = "2px solid red";
   setState();
 };
 
 document.getElementById("runners").onclick = () => {
   levels = "runners";
+  document.getElementById("myCanvas").style.border = "2px solid aqua";
+  document.getElementById("pauseBtn").style.backgroundColor = "aqua";
+  document.getElementById("secondDiv").style.border = "2px solid aqua";
+  document.getElementById("btns").style.border = "2px solid aqua";
+  document.getElementById("mainDiv").style.border = "2px solid aqua";
   setState();
 };
 
 document.getElementById("hydra").onclick = () => {
   levels = "hydra";
+  document.getElementById("myCanvas").style.border = "2px solid yellow";
+  document.getElementById("pauseBtn").style.backgroundColor = "yellow";
+  document.getElementById("secondDiv").style.border = "2px solid yellow";
+  document.getElementById("btns").style.border = "2px solid yellow";
+  document.getElementById("mainDiv").style.border = "2px solid yellow";
   setState();
 };
 
@@ -68,9 +83,26 @@ const startNewGame = () => {
   player.hp = 10;
   TimeOn = Date.now();
   enemies = {};
-  document.getElementById("status").innerText = "Playing...";
   document.getElementById("mainDiv").style.opacity = 0.3;
-  document.getElementById("btns").style.opacity = 0.3;
+  document.getElementById("myCanvas").style.cursor = "none";
+
+  if (levels === "rabbit") {
+    document.getElementById("status").innerText = "Rabbit Party On";
+    document.getElementById("rabbit").style.opacity = 1;
+    document.getElementById("runners").style.opacity = 0.3;
+    document.getElementById("hydra").style.opacity = 0.3;
+  } else if (levels === "runners") {
+    document.getElementById("status").innerText = "Speed Runners On";
+    document.getElementById("runners").style.opacity = 1;
+    document.getElementById("rabbit").style.opacity = 0.3;
+    document.getElementById("hydra").style.opacity = 0.3;
+  } else if (levels === "hydra") {
+    document.getElementById("status").innerText = "Hydra On";
+    document.getElementById("hydra").style.opacity = 1;
+    document.getElementById("runners").style.opacity = 0.3;
+    document.getElementById("rabbit").style.opacity = 0.3;
+  }
+
   soundtrack.play();
   startLevels();
   engine = setInterval(update, 40);
@@ -185,6 +217,17 @@ const drawGameOver = () => {
   document.getElementById("score").innerHTML = `${survived}s`;
   document.getElementById("mainDiv").style.opacity = 1;
   document.getElementById("btns").style.opacity = 1;
+  document.getElementById("myCanvas").style.border =
+    "2px solid rgb(0, 255, 64)";
+  document.getElementById("pauseBtn").style.backgroundColor = "rgb(0, 255, 64)";
+  document.getElementById("secondDiv").style.border =
+    "2px solid rgb(0, 255, 64)";
+  document.getElementById("btns").style.border = "2px solid rgb(0, 255, 64)";
+  document.getElementById("mainDiv").style.border = "2px solid rgb(0, 255, 64)";
+  document.getElementById("rabbit").style.opacity = 1;
+  document.getElementById("runners").style.opacity = 1;
+  document.getElementById("hydra").style.opacity = 1;
+  document.getElementById("myCanvas").style.cursor = "unset";
 };
 
 //Function controlling the enemys speed and not allowing them to leave the canvas
@@ -260,14 +303,14 @@ const update = () => {
       let nemysis = Object.values(enemies);
       nemysis.forEach(enemy => {
         if (enemy.spdY > 0) {
-          enemy.spdY += 0.05;
+          enemy.spdY += 0.02;
         } else {
-          enemy.spdY -= 0.05;
+          enemy.spdY -= 0.02;
         }
         if (enemy.spdX > 0) {
-          enemy.spdX += 0.05;
+          enemy.spdX += 0.02;
         } else {
-          enemy.spdX -= 0.05;
+          enemy.spdX -= 0.02;
         }
       });
     }
