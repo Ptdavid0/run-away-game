@@ -36,7 +36,6 @@ p {
 }
 
 #mainDiv {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,7 +60,6 @@ h1 {
 
 
 #secondDiv {
-
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -126,7 +124,6 @@ h2 {
     top: 101px;
     right: 424px;
     text-align: center;
-
 }
 
 #pauseBtn {

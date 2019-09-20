@@ -169,6 +169,7 @@ const setState = () => {
     soundtrack.pause();
     soundtrack.currentTime = 0;
     soundtrack.play();
+    gen = 0;
     state = !state;
     startNewGame();
   }
